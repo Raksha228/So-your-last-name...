@@ -8,7 +8,9 @@
         Title="ProductEditorView" Height="500" Width="300" Icon="{StaticResource Icon}">
 
     <Window.Resources>
+        
         <!-- Стиль для TextBox с закруглёнными углами -->
+        
         <Style TargetType="TextBox">
             <Setter Property="Margin" Value="10"/>
             <Setter Property="Padding" Value="8"/>
