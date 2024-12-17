@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ProductsAppMeF.Models;
+using ProductsAppMeF.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ProductsAppMeF.ViewModels;
+
 
 namespace ProductsAppMeF.Views
 {
@@ -20,12 +22,16 @@ namespace ProductsAppMeF.Views
     /// </summary>
     public partial class ProductEditorView : Window
     {
-        ProductEditorModels productEditor;
-        public ProductEditorView()
+
+        public ProductEditorView(EntityService service, Product product = null!)
         {
             InitializeComponent();
-            DataContext = productEditor;
-
+            DataContext = new ProductViewModel(product, service);
         }
+
+        //private void CloseButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Close();
+        //}
     }
 }

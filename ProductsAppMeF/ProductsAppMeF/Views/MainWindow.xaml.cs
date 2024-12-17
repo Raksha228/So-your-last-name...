@@ -1,4 +1,5 @@
-﻿using ProductsAppMeF.ViewModels;
+﻿
+using ProductsAppMeF.ViewModels;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,11 +18,11 @@ namespace ProductsAppMeF
     /// </summary>
     public partial class MainWindow : Window
     {
-        MainWindowModels viewModel;
+        
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = viewModel;
+            DataContext = new MainViewModel();
         }
     }
 }

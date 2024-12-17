@@ -9,22 +9,18 @@ namespace ProductsAppMeF.Models
     public class Category
     {
         public Guid Id { get; set; }
-
-
         public string Title { get; set; }
-        public string? Discription { get; set; }
-
-
+        public string? Description { get; set; }
         public bool IsHiden { get; set; }
-
-
         public virtual ICollection<Product> Products { get; set; }
 
         public override string ToString()
         {
-            var vi = IsHiden ? "Скрытая запись" : "Видемая запись";
-            return $"{Title}: {Discription}; {vi}";
+            var visibility = IsHiden ? "Скрытая запись" : "Видимая запись";
+            return $"{Title}: {Description}, {visibility}";
         }
+
+
 
     }
 }

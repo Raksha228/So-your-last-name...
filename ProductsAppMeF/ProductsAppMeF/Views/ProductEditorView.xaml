@@ -5,9 +5,97 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProductsAppMeF.Views"
         mc:Ignorable="d"
-        Title="ProductEditorView" Height="450" Width="800">
-    <Grid>
-     
+        Title="ProductEditorView" Height="500" Width="300" Icon="{StaticResource Icon}">
 
+    <Window.Resources>
+        <!-- Стиль для TextBox с закруглёнными углами -->
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="LightGray"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border CornerRadius="20" 
+                                Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <Grid>
+                                <!-- Placeholder -->
+                                <TextBlock x:Name="Placeholder" 
+                                           Text="{TemplateBinding Tag}" 
+                                           Foreground="Gray" 
+                                           Margin="12,0,0,0"
+                                           VerticalAlignment="Center"
+                                           IsHitTestVisible="False"
+                                           Visibility="Collapsed"/>
+                                <ScrollViewer x:Name="PART_ContentHost" Margin="5" />
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!-- Показывать Placeholder, если Text пустой -->
+                            <Trigger Property="Text" Value="">
+                                <Setter TargetName="Placeholder" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Стиль для кнопок с закруглёнными углами -->
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="20" 
+                                BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+
+
+
+    <Grid>
+
+        <Border Margin="10" BorderThickness="1" BorderBrush="Gray" CornerRadius="10">
+            <StackPanel VerticalAlignment="Top" Margin="20">
+
+                <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Tag="Название"  />
+
+                <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"  Tag="Описание" Height="80" AcceptsReturn="True" />
+
+                <TextBox Text="{Binding Amount, UpdateSourceTrigger=PropertyChanged}" Tag="Количество" />
+
+
+
+                <ComboBox SelectedValue="{Binding SelectedCategory,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Categories, UpdateSourceTrigger=PropertyChanged}" Margin="10" Padding="8"/>
+
+
+
+                <CheckBox IsChecked="{Binding IsHiden, UpdateSourceTrigger=PropertyChanged}" Content="Сделать Невидемым"/>
+
+                <Button Command="{Binding SaveCommand}" Content="Save" HorizontalAlignment="Center" Width="120" Height="60"/>
+
+            </StackPanel>
+        </Border>
     </Grid>
+
 </Window>
